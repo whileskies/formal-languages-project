@@ -1,3 +1,5 @@
+package cfg;
+
 import java.util.Objects;
 
 public class Symbol implements Cloneable {
@@ -61,7 +63,7 @@ public class Symbol implements Cloneable {
 
     @Override
     public String toString() {
-        return "Symbol{" +
+        return "cfg.Symbol{" +
                 "symbol='" + symbol + '\'' +
                 ", type=" + type +
                 '}';

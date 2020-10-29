@@ -1,3 +1,5 @@
+package cfg;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -65,7 +67,7 @@ public class CFG {
 
     @Override
     public String toString() {
-        return "CFG{" +
+        return "cfg.CFG{" +
                 "variable=" + variable +
                 ", terminal=" + terminal +
                 ", productions=" + productions +

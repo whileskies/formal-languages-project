@@ -1,4 +1,5 @@
-import java.util.List;
+package cfg;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -52,7 +53,7 @@ public class Production {
 
     @Override
     public String toString() {
-        return "Production{" +
+        return "cfg.Production{" +
                 "left=" + left +
                 ", rights=" + rights +
                 '}';
