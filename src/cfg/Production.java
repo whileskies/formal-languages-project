@@ -1,5 +1,6 @@
 package cfg;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -35,6 +36,44 @@ public class Production {
 
     public int getRightsNum() {
         return rights.size();
+    }
+
+    public void removeRight(Right right) {
+        rights.remove(right);
+    }
+
+    public void addRights(Set<Right> newRights) {
+        rights.addAll(newRights);
+    }
+
+    public void addRight(Right newRight) {
+        rights.add(newRight);
+    }
+
+    public Set<Symbol> getAllSymbols() {
+        Set<Symbol> symbols = new HashSet<>();
+        for (Right right : rights) {
+            symbols.addAll(right.getSymbolSet());
+        }
+        return symbols;
+    }
+
+    public Set<Symbol> getTerminalSymbols() {
+        Set<Symbol> set = new HashSet<>();
+        for (Right right : rights) {
+            set.addAll(right.getTerminalSet());
+        }
+
+        return set;
+    }
+
+    public Set<Symbol> getNonTerminalSymbols() {
+        Set<Symbol> set = new HashSet<>();
+        for (Right right : rights) {
+            set.addAll(right.getNonTerminalSet());
+        }
+
+        return set;
     }
 
     @Override

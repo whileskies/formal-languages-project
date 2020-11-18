@@ -43,6 +43,10 @@ public class Right {
         return set;
     }
 
+    public Set<Symbol> getSymbolSet() {
+        return new HashSet<>(symbols);
+    }
+
     public boolean containSymbol(Symbol symbol) {
         for (Symbol s : symbols) {
             if (s.equals(symbol))
@@ -50,6 +54,14 @@ public class Right {
         }
 
         return false;
+    }
+
+    public boolean isUnit() {
+        return symbolsNum() == 1 && symbols.get(0).isNonTerminalSymbol();
+    }
+
+    public Symbol getUnitSymbol() {
+        return symbols.get(0);
     }
 
     @Override

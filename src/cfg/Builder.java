@@ -26,7 +26,7 @@ public class Builder {
 
         if (symbolStr.charAt(0) == '#') {
             symbol.setSymbol("ε");
-            symbol.setType(Symbol.NULL_SYMBOL);
+            symbol.setType(Symbol.EPSILON_SYMBOL);
         } else if (Character.isLowerCase(symbolStr.charAt(0))) {
             symbol.setSymbol(symbolStr);
             symbol.setType(Symbol.TERMINAL_SYMBOL);
@@ -38,6 +38,26 @@ public class Builder {
         }
 
         return symbol;
+    }
+
+    public static Symbol getNonTerminalSymbol(Symbol refer, Set<Symbol> excludeSymbols) {
+        Symbol nonTerminalSymbol = null;
+        if (refer.isTerminalSymbol()) {
+            Symbol tmp = Builder.buildSymbol(refer.getSymbol().toUpperCase());
+            if (!excludeSymbols.contains(tmp)) {
+                nonTerminalSymbol = tmp;
+            } else {
+                for (int i = 1; i < 10; i++) {
+                    tmp = Builder.buildSymbol(refer.getSymbol().toUpperCase() + i);
+                    if (!excludeSymbols.contains(tmp)) {
+                        nonTerminalSymbol = tmp;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return nonTerminalSymbol;
     }
 
     public static Symbol buildEpsilon() {
@@ -101,5 +121,30 @@ public class Builder {
         Symbol startSymbol = buildSymbol(start);
 
         return new CFG(startSymbol, productions);
+    }
+
+    public static CfgString buildCfgString(String str) {
+        List<Symbol> symbols = new ArrayList<>();
+
+        String re = "#|[a-z]\\d*";
+        Pattern pattern = Pattern.compile(re);
+        Matcher matcher = pattern.matcher(str);
+
+        while (matcher.find()) {
+            symbols.add(buildSymbol(matcher.group()));
+        }
+
+        return new CfgString(symbols);
+    }
+
+    public static void main(String[] args) {
+        Symbol a = Builder.buildSymbol("a");
+        Symbol A = Builder.buildSymbol("A");
+        Symbol A2 = Builder.buildSymbol("A2");
+        Set<Symbol> exclude = new HashSet<>();
+        exclude.add(A);
+        exclude.add(A2);
+
+        System.out.println(getNonTerminalSymbol(a, exclude));
     }
 }

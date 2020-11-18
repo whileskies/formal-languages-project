@@ -48,4 +48,47 @@ public class Printer {
 
         return sb.toString();
     }
+
+    public static String transitionFunctionToString(TransitionFunction transitionFunction) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("δ(q, ");
+        sb.append(transitionFunction.getRead().getSymbol());
+        sb.append(" ,");
+        sb.append(transitionFunction.getStackTop().getSymbol());
+        sb.append(") = ");
+        sb.append("(q, ");
+        for (Symbol symbol : transitionFunction.getPushed()) {
+            sb.append(symbol.getSymbol());
+        }
+        sb.append(")");
+
+        return sb.toString();
+    }
+
+    public static String cfgPDAToString(CfgPDA cfgPDA) {
+        StringBuilder sb = new StringBuilder();
+
+        boolean need = false;
+        List<TransitionFunction> transitionFunctions = cfgPDA.getTransitionFunctions();
+        for (TransitionFunction function : transitionFunctions) {
+            if (!need) {
+                need = true;
+            } else {
+                sb.append("\n");
+            }
+            sb.append(transitionFunctionToString(function));
+        }
+
+        return sb.toString();
+    }
+
+    public static String cfgStringToString(CfgString cfgString) {
+        StringBuilder sb = new StringBuilder();
+        for (Symbol symbol : cfgString.getSymbols()) {
+            sb.append(symbol.getSymbol());
+        }
+
+        return sb.toString();
+    }
 }

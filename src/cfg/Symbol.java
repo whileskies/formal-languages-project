@@ -2,8 +2,8 @@ package cfg;
 
 import java.util.Objects;
 
-public class Symbol implements Cloneable {
-    public static final int NULL_SYMBOL = 0;
+public class Symbol {
+    public static final int EPSILON_SYMBOL = 0;
     public static final int TERMINAL_SYMBOL = 1;
     public static final int NON_TERMINAL_SYMBOL = 2;
 
@@ -35,12 +35,15 @@ public class Symbol implements Cloneable {
     }
 
     public boolean isNullSymbol() {
-        return type == NULL_SYMBOL;
+        return type == EPSILON_SYMBOL;
     }
 
     public boolean isTerminalSymbol() {
-        return type == TERMINAL_SYMBOL
-                || type == NULL_SYMBOL;
+        return type == TERMINAL_SYMBOL;
+    }
+
+    public boolean isEpsilonSymbol() {
+        return type == EPSILON_SYMBOL;
     }
 
     public boolean isNonTerminalSymbol() {
@@ -53,7 +56,7 @@ public class Symbol implements Cloneable {
         if (!(o instanceof Symbol)) return false;
         Symbol symbol1 = (Symbol) o;
         return type == symbol1.type &&
-                Objects.equals(symbol, symbol1.symbol);
+                symbol.equals(symbol1.symbol);
     }
 
     @Override

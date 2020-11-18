@@ -1,6 +1,7 @@
 package cfg;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Utils {
@@ -22,5 +23,14 @@ public class Utils {
         dfs(nums, index + 1, subset, subsets);
         subset.remove(subset.size() - 1);
         dfs(nums, index + 1, subset, subsets);
+    }
+
+
+    public static void main(String[] args) {
+        List<Integer> nums = Arrays.asList(1, 2, 3);
+        List<List<Integer>> subsets = subsets(nums);
+        for (List<Integer> subset : subsets) {
+            System.out.println(subset);
+        }
     }
 }

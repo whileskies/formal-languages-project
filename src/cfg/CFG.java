@@ -1,26 +1,16 @@
 package cfg;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CFG {
-    private final Set<Symbol> variable;
 
-    private final Set<Symbol> terminal;
+    private HashMap<Symbol, Production> productions;
 
-    private final HashMap<Symbol, Production> productions;
-
-    private final Symbol start;
+    private Symbol start;
 
 
     public CFG(Symbol start, List<Production> productions) {
-        variable = new HashSet<>();
-        terminal = new HashSet<>();
-
         this.start = start;
-        variable.add(this.start);
 
         this.productions = new HashMap<>();
         for (Production production : productions) {
@@ -31,21 +21,8 @@ public class CFG {
             } else {
                 this.productions.put(production.getLeft(), production);
             }
-
-            variable.add(production.getLeft());
-            for (Right right : production.getRights()) {
-                variable.addAll(right.getNonTerminalSet());
-                terminal.addAll(right.getTerminalSet());
-            }
         }
-    }
 
-    public Set<Symbol> getVariable() {
-        return variable;
-    }
-
-    public Set<Symbol> getTerminal() {
-        return terminal;
     }
 
     public HashMap<Symbol, Production> getProductions() {
@@ -56,20 +33,39 @@ public class CFG {
         return start;
     }
 
-    public void removeSymbolFromVariableSet(Symbol symbol) {
-        variable.remove(symbol);
+    public void setProductions(HashMap<Symbol, Production> productions) {
+        this.productions = productions;
     }
 
-    public void removeSymbolFromTerminal(Symbol symbol) {
-        terminal.remove(symbol);
+    public void setStart(Symbol start) {
+        this.start = start;
     }
 
+    public Set<Symbol> getTerminalSymbols() {
+        Set<Symbol> symbols = new HashSet<>();
+
+        for (Map.Entry<Symbol, Production> entry : productions.entrySet()) {
+            Production production = entry.getValue();
+            symbols.addAll(production.getTerminalSymbols());
+        }
+
+        return symbols;
+    }
+
+    public Set<Symbol> getNonTerminalSymbols() {
+        Set<Symbol> symbols = new HashSet<>();
+
+        for (Map.Entry<Symbol, Production> entry : productions.entrySet()) {
+            Production production = entry.getValue();
+            symbols.addAll(production.getNonTerminalSymbols());
+        }
+
+        return symbols;
+    }
 
     @Override
     public String toString() {
         return "cfg.CFG{" +
-                "variable=" + variable +
-                ", terminal=" + terminal +
                 ", productions=" + productions +
                 ", start=" + start +
                 '}';
