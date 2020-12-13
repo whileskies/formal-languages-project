@@ -139,12 +139,15 @@ public class Builder {
 
     public static void main(String[] args) {
         Symbol a = Builder.buildSymbol("a");
-        Symbol A = Builder.buildSymbol("A");
         Symbol A2 = Builder.buildSymbol("A2");
-        Set<Symbol> exclude = new HashSet<>();
-        exclude.add(A);
-        exclude.add(A2);
+        Right right = Builder.buildRight("aBC");
+        Production production = Builder.buildProduction("S->aBC");
+        CFG cfg = Builder.buildCFG("S", "S->aSb|a|b|#");
 
-        System.out.println(getNonTerminalSymbol(a, exclude));
+        System.out.println(a);
+        System.out.println(A2);
+        System.out.println(Printer.rightToString(right));
+        System.out.println(Printer.productionToString(production));
+        System.out.println(Printer.cfgToString(cfg));
     }
 }

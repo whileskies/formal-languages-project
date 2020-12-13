@@ -184,31 +184,21 @@ public class CfgNormalForm {
     }
 
     public static void main(String[] args) {
-        /*Symbol ALeft = Builder.buildSymbol("S");
-        Right ARight = Builder.buildRight("ABA");
-
-        Production B = Builder.buildProduction("A->aA|bB|b");
-
-        System.out.println(Printer.rightToString(ARight));
-        System.out.println(Printer.productionToString(B));
-
-        Production newProduction = replaceFirstSymbol(ALeft, ARight, B);
-        System.out.println(Printer.productionToString(newProduction));*/
-
-        //S->aA|aBbC; A->abA|#; B->bBc|C; C->cC|c
-        CFG cfg = Builder.buildCFG("S", "S->aSb|a|b|#");
-        System.out.println("原CFG");
+        CFG cfg = Builder.buildCFG("S", "S->aAbBC; A->aA|B|#; B->bcB|Cca; C->cC|c");
+        System.out.println("原CFG：");
         System.out.println(Printer.cfgToString(cfg));
+        System.out.println();
 
         CfgSimplification cfgSimplification = new CfgSimplification(cfg).eraseEpsilon().eraseUnitProduction().eraseUnusefulSymbols();
 
-        System.out.println("化简后");
+        System.out.println("化简后：");
         System.out.println(Printer.cfgToString(cfg));
+        System.out.println();
 
         CfgNormalForm cfgNormalForm = new CfgNormalForm(cfg);
         cfgNormalForm.toGreibachNormalForm();
 
-        System.out.println("范式");
+        System.out.println("Greibach范式：");
         System.out.println(Printer.cfgToString(cfg));
 
     }

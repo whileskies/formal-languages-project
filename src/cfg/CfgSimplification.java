@@ -359,35 +359,30 @@ public class CfgSimplification {
     }
 
     public static void main(String[] args) {
-//        Right right = Builder.buildRight("AaA");
-//        Set<Symbol> nullableVariable = new HashSet<>();
-//        nullableVariable.add(Builder.buildSymbol("A"));
-//        System.out.println(replaceProduction(right, nullableVariable));
-
 //        CFG cfg = Builder.buildCFG("S", "S->AB|a; A->b|#");
 //        CFG cfg = Builder.buildCFG("S", "S->aA|aBB; A->aaA|#; B->bB|bbC; C->B");
-        CFG cfg = Builder.buildCFG("S", "S->A|b; A->Aa");
+        CFG cfg = Builder.buildCFG("S", "S->AB; A->AaA|#; B->BbB|#");
         System.out.println(Printer.cfgToString(cfg));
         CfgSimplification cfgSimplification = new CfgSimplification(cfg);
-
-        System.out.println();
-
         cfgSimplification.eraseEpsilon();
+        System.out.println("消除ε产生式：");
         System.out.println(Printer.cfgToString(cfg));
-
         System.out.println();
 
-        cfgSimplification.eraseUnitProduction();
-        System.out.println(Printer.cfgToString(cfg));
+        CFG cfg2 = Builder.buildCFG("S", "S->Aa|B; B->A|bb; A->a|bc|B");
+        System.out.println(Printer.cfgToString(cfg2));
+        CfgSimplification cfgSimplification2 = new CfgSimplification(cfg2);
+        cfgSimplification2.eraseUnitProduction();
+        System.out.println("消除单元产生式：");
+        System.out.println(Printer.cfgToString(cfg2));
+        System.out.println();
 
-        System.out.println("unuseful");
-
-        cfgSimplification.eraseUnusefulSymbols();
-        System.out.println(Printer.cfgToString(cfg));
-//        System.out.println();
-//        cfg = cfgSimplification.eraseUnitProduction();
-//        System.out.println(Printer.cfgToString(cfg));
-
+        CFG cfg3 = Builder.buildCFG("S", "S->AB|a; A->b");
+        System.out.println(Printer.cfgToString(cfg3));
+        CfgSimplification cfgSimplification3 = new CfgSimplification(cfg3);
+        cfgSimplification3.eraseUnusefulSymbols();
+        System.out.println("消除无用符号：");
+        System.out.println(Printer.cfgToString(cfg3));
 
     }
 }

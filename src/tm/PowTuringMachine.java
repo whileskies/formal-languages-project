@@ -108,7 +108,7 @@ public class PowTuringMachine {
         int state = START_STATE;  //当前状态
 
         while (state != END_STATE) {
-//            System.out.println(getID(cur, state));
+            System.out.println(getID(cur, state));
 
             char read = tape.get(cur);
 
@@ -193,7 +193,7 @@ public class PowTuringMachine {
 
     public static void main(String[] args) {
         PowTuringMachine tm = new PowTuringMachine();
-        System.out.println("ret: " + tm.pow(10, 10));
+        System.out.println("ret: " + tm.pow(2, 3));
     }
 
 }

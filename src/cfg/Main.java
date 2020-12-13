@@ -45,5 +45,8 @@ public class Main {
 
         CfgString cfgString = Builder.buildCfgString("aabb");
         System.out.println(Printer.cfgStringToString(cfgString) + " : " + cfgPDA.acceptCfgString(cfgString));
+
+        CfgString cfgString2 = Builder.buildCfgString("aaaabb");
+        System.out.println(Printer.cfgStringToString(cfgString2) + " : " + cfgPDA.acceptCfgString(cfgString2));
     }
 }
