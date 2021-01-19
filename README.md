@@ -40,7 +40,8 @@ cfgSimplification.eraseUnusefulSymbols();
 System.out.println("消除无用符号:");
 System.out.println(Printer.cfgToString(cfg));
 
-CfgSimplification cfgSimplification = new CfgSimplification(cfg).eraseEpsilon().eraseUnitProduction().eraseUnusefulSymbols();
+CfgSimplification cfgSimplification = new 
+CfgSimplification(cfg).eraseEpsilon().eraseUnitProduction().eraseUnusefulSymbols();
 ```
 
 ##### 转为Greibach范式
