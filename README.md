@@ -1,12 +1,12 @@
 # 形式语言与自动机课程项目
 Formal Languages and Automata course project
 
-#### 任务
+### 任务
 
 1. 对一文法进行化简，将其转化为Greibach范式，并将Greibach范式转为PDA，判断是否能接受某一字符串
 2. 模拟计算x^y的图灵机
 
-#### 上下文无关文法
+### 上下文无关文法
 
 使用方法：
 
@@ -71,7 +71,7 @@ CfgString cfgString2 = Builder.buildCfgString("aaaabb");
 System.out.println(Printer.cfgStringToString(cfgString2) + " : " + cfgPDA.acceptCfgString(cfgString2));
 ```
 
-#### 图灵机
+### 图灵机
 
 使用方法：
 
